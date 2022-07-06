@@ -25,8 +25,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>com.sap.ide.j2ee.adapter.ejb.ejbNature</nature>
 		<nature>com.sap.ide.j2ee.adapter.ext.ejb.ejbNature</nature>
 		<nature>com.sap.ide.j2ee.adapter.ext.cmpejb.cmpejbNature</nature>
