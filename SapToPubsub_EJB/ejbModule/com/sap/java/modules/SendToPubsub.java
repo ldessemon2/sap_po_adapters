@@ -1,8 +1,14 @@
 package com.sap.java.modules;
 
+import java.io.IOException;
+
 import javax.ejb.Stateless;
 import com.google.cloud.pubsub.v1.TopicAdminClient;
 import com.google.pubsub.v1.TopicName;
+import com.sap.aii.af.lib.mp.module.Module;
+import com.sap.aii.af.lib.mp.module.ModuleContext;
+import com.sap.aii.af.lib.mp.module.ModuleData;
+import com.sap.aii.af.lib.mp.module.ModuleException;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutures;
 import com.google.api.core.ApiFutureCallback;
@@ -15,14 +21,20 @@ import com.google.pubsub.v1.PubsubMessage;
  * Session Bean implementation class SendToPubsub
  */
 @Stateless
-public class SendToPubsub implements SendToPubsubRemote, SendToPubsubLocal {
+public class SendToPubsub implements Module, SendToPubsubRemote, SendToPubsubLocal {
 
     /**
      * Default constructor. 
      */
     public SendToPubsub() {
         // TODO Auto-generated constructor stub 
-        Publisher publisher = null;
+        
+    }
+
+	@Override
+	public ModuleData process(ModuleContext moduleContext, ModuleData inputModuleData) throws ModuleException {
+		// TODO Auto-generated method stub
+		Publisher publisher = null;
         try {
             TopicName topic = TopicName.of("internal-naoxyatrainingservice", "lud-topic");
             publisher = Publisher.newBuilder(topic).build();
@@ -39,12 +51,16 @@ public class SendToPubsub implements SendToPubsubRemote, SendToPubsubLocal {
                 }
             }, MoreExecutors.directExecutor());
             //...
-        } finally {
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
             if (publisher != null) {
                 publisher.shutdown();
-                publisher.awaitTermination(1, TimeUnit.MINUTES);
+                //publisher.awaitTermination(1, TimeUnit.MINUTES);
             }
         }
-    }
+		return null;
+	}
 
 }
