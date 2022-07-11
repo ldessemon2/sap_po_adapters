@@ -1,7 +1,7 @@
 package com.sap.java.modules;
 
 import java.io.IOException;
-
+import com.sap.aii.af.service.auditlog.Audit;
 import javax.ejb.Stateless;
 import com.google.cloud.pubsub.v1.TopicAdminClient;
 import com.google.pubsub.v1.TopicName;
@@ -9,6 +9,8 @@ import com.sap.aii.af.lib.mp.module.Module;
 import com.sap.aii.af.lib.mp.module.ModuleContext;
 import com.sap.aii.af.lib.mp.module.ModuleData;
 import com.sap.aii.af.lib.mp.module.ModuleException;
+import com.sap.engine.interfaces.messaging.api.MessageKey;
+import com.sap.engine.interfaces.messaging.api.auditlog.AuditLogStatus;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutures;
 import com.google.api.core.ApiFutureCallback;
@@ -22,7 +24,7 @@ import com.google.pubsub.v1.PubsubMessage;
  */
 @Stateless
 public class SendToPubsub implements Module, SendToPubsubRemote, SendToPubsubLocal {
-
+	MessageKey amk = null;
     /**
      * Default constructor. 
      */
@@ -34,6 +36,7 @@ public class SendToPubsub implements Module, SendToPubsubRemote, SendToPubsubLoc
 	@Override
 	public ModuleData process(ModuleContext moduleContext, ModuleData inputModuleData) throws ModuleException {
 		// TODO Auto-generated method stub
+		Audit.addAuditLogEntry(amk, AuditLogStatus.SUCCESS,"step 1");
 		Publisher publisher = null;
         try {
             TopicName topic = TopicName.of("internal-naoxyatrainingservice", "lud-topic");

@@ -39,5 +39,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/google-api-client-assembly-1.32.1-1.32.1/google-api-java-client/libs/google-api-client-1.32.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/jar_files (1)/api-common-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/AdapterModule75/AdapterModule75/com.sap.aii.af.svc_api.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
